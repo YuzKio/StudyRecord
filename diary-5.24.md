@@ -126,13 +126,13 @@ HTML标签分为块级标签、行内标签、内联块状标签。
   * 可以自动换行
   * 多个块状元素标签写在一起，默认排列方式从上至下
   * 可以使用`margin: 0 auto`自动对齐
-  * 常见的有：<div>、<p>、<h1>...<h6>、<ol>、<ul>、<dl>、<table>、<address>、<blockquote>、<form>
+  * 常见的有：\<div>、\<p>、\<h1>...\<h6>、\<ol>、\<ul>、\<dl>、\<table>、\<address>、\<blockquote>、\<form>
 
 * 内联标签：
 
   * 标签在一行内，宽度和高度由内容决定，只有在内容超过HTML的宽度时才会换行（不能自动换行）
   * `margin`上下无效果，只有左右有效果，`padding`都有效果，会撑大空间；`box-sizing: border-box`无效，因为该属性针对盒模型。
-  * 常见的有：<a>、<span>、<i>、<em>、<strong>、<label>、<q>、<var>、<cite>、<code>
+  * 常见的有：\<a>、\<span>、\<i>、\<em>、\<strong>、\<label>、\<q>、\<var>、\<cite>、\<code>
 
 * 内联块状标签（inline-block）
 
@@ -148,7 +148,7 @@ HTML标签分为块级标签、行内标签、内联块状标签。
 
   * 水平排列，但所有元素默认会有一个空格的间隙，因为元素之间在html中书写有回车换行，浏览器解析会将其解析为一个空格。
 
-  * 常见的有：<img>、<input>
+  * 常见的有：\<img>、\<input>
 
 
 
@@ -163,7 +163,7 @@ https://www.html.cn/qa/html5/13389.html
 * **title**：唯一必需元素
 
 * **base**：为页面上的所有链接规定默认地址或默认目标。通常情况下，浏览器会从当前文档的URL中提取相应的元素来填写相对URL中的空白。
-使用<base>标签可以改变这一点。浏览器随后将不再使用当前文档的URL，而使用指定的基本URL来解析所有的相对URL。这其中包括 <a>、<img>、<link>、<form>标签中的 URL。
+使用\<base>标签可以改变这一点。浏览器随后将不再使用当前文档的URL，而使用指定的基本URL来解析所有的相对URL。这其中包括\<a>、\<img>、\<link>、\<form>标签中的 URL。
 
 可选属性：target。值：\_blank、\_parent、\_self、\_top、framename。表明在何处打开页面中所有的链接。
 
