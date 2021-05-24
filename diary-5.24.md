@@ -1,35 +1,33 @@
-- [ 今天的学习](#head1)
-	- [ 基础](#head2)
-		- [ 访问一个网站的过程](#head3)
-	- [ 面经](#head4)
-		- [ HTML](#head5)
-			- [ 1、HTML页面常见的结构是怎么样的？](#head6)
-			- [ 2、HTML标签有哪几类？](#head7)
-			- [ 3、head标签内包含什么？](#head8)
-			- [ 4、HTML5新增的语义化标签](#head9)
-		- [ CSS](#head10)
-			- [ 1、CSS盒模型](#head11)
-			- [ 2、长度单位（em、rem等）](#head12)
-			- [ 3、CSS3怎么做动画？](#head13)
-			- [ 4、不定宽高的元素居中](#head14)
+- [ 今天的学习</span>](#head1)
+  - [<span id="1">基础</span>](#head2)
+  	- [<span id="1.1">访问一个网站的过程</span>](#head3)
+  - [ 面经](#head4)
+  	- [ HTML](#head5)
+  		- [ 1、HTML页面常见的结构是怎么样的？](#head6)
+  		- [ 2、HTML标签有哪几类？](#head7)
+  		- [ 3、head标签内包含什么？](#head8)
+  		- [ 4、HTML5新增的语义化标签](#head9)
+  	- [ CSS](#head10)
+  		- [ 1、CSS盒模型](#head11)
+  		- [ 2、长度单位（em、rem等）](#head12)
+  		- [ 3、CSS3怎么做动画？](#head13)
+  		- [ 4、不定宽高的元素居中](#head14)
 
-
-
-# 今天的学习
+# <span id="head1"> 今天的学习</span>
 
 *flag*：
 
-​	注册了个Codepen。感觉是个好东西，之前也有相应的资料有过，希望以后自己可以主动多去看一看。
+	注册了个Codepen。感觉是个好东西，之前也有相应的资料有过，希望以后自己可以主动多去看一看。
+	
+	这周内把数据库的登录注册做好！
+	
+	写算法呀！
 
-​	这周内把数据库的登录注册做好！
-
-​	写算法呀！
 
 
+## <span id="head2"><span id="1">基础</span></span>
 
-## 基础
-
-### 访问一个网站的过程
+### <span id="head3"><span id="1.1">访问一个网站的过程</span></span>
 
 总的来说，是浏览器和服务器交流、服务器和数据库交流的过程。
 具体来说，从输入URL到显示页面，经历了以下过程：
@@ -38,14 +36,14 @@
 - 浏览器向服务器发起**TCP连接**，与浏览器经历**三次握手**
 - 握手成功后，浏览器向服务器**发送http请求**，请求数据包
 - 服务器处理收到的请求，将数据返回至浏览器
-   1. Web Server进行相应的初步处理，使用服务器脚本生成页面
-   2. WebServer将生成的页面作为HTTP相应的body，根据不同的处理结果生成HTTP header发回给客户端
+1. Web Server进行相应的初步处理，使用服务器脚本生成页面
+2. WebServer将生成的页面作为HTTP相应的body，根据不同的处理结果生成HTTP header发回给客户端
 - 浏览器收到HTTP响应
 - 读取页面内容、浏览器渲染、解析HTML源码
-   1. 解析过程中遇到引动的服务器上的资源再向Web Server发送请求，Web Server找到对应的文件发送回来。
+1. 解析过程中遇到引动的服务器上的资源再向Web Server发送请求，Web Server找到对应的文件发送回来。
 - 生成DOM树，解析CSS样式，JS交互
 - 客户端和服务器交互
-   1. 交互过程中客户端向服务器索取或提交额外的数据（局部刷新等），一般是跳转、或通过JS代码（相应某个动作或者定时）向Web Server发送请求，Web Server再用服务器脚本进行处理（生成资源或写入数据），把资源返回给客户端
+1. 交互过程中客户端向服务器索取或提交额外的数据（局部刷新等），一般是跳转、或通过JS代码（相应某个动作或者定时）向Web Server发送请求，Web Server再用服务器脚本进行处理（生成资源或写入数据），把资源返回给客户端
 - ajax查询等
 
 *参考：*
@@ -55,14 +53,15 @@ https://www.zhihu.com/question/22689579
 
 
 
-## 面经
-### HTML
+## <span id="head4"> 面经</span>
 
-#### 1、HTML页面常见的结构是怎么样的？
+### <span id="head5"> HTML</span>
+
+#### <span id="head6"> 1、HTML页面常见的结构是怎么样的？</span>
 
 完整的HTML包括html DOCTYPE声明、tiltle、head、网页编码声明等。
 
-```
+```html
 <!DOCTYPE html>
 <html>
     <head>
@@ -75,36 +74,39 @@ https://www.zhihu.com/question/22689579
 
 - DOCTYPE：文档声明，位于页面的首行，告知浏览器使用哪种HTML版本规范方式解析网页
 - html：包裹着head和body
-   1. head：描述HTML文件各种属性和信息，比如网页标题、字符编码、是否启用缓存，引用的外部脚本和样式等等。
-        * title：网页的标题
-        * meta：提供有关页面的元信息，比如针对搜索引擎的关键字、缓存时间、启用浏览器内核等。有两个主要属性：name和http-equiv。
-           1. name属性：用于描述网页，比如定义网页的关键词，关键内容、标注作者、版权等。
+1. head：描述HTML文件各种属性和信息，比如网页标题、字符编码、是否启用缓存，引用的外部脚本和样式等等。
+     * title：网页的标题
+     * meta：提供有关页面的元信息，比如针对搜索引擎的关键字、缓存时间、启用浏览器内核等。有两个主要属性：name和http-equiv。
+       1. name属性：用于描述网页，比如定义网页的关键词，关键内容、标注作者、版权等。
+
 ```
 <meta name="属性值" content="描述内容" />
 ```
-​						2. http-equiv属性：用于设置网页的字符集，缓存机制等
+
+​				 2. http-equiv属性：用于设置网页的字符集，缓存机制等
 
 ```
 <meta http-equiv="属性值" content="参数" />
 ```
+
 2. body：HTML的主体，网页的文本、超链接、图像、表格、视频等所有在网页上显示的内容。
 
-   
+
 
 - **常用name属性值：**
-  **keywords**——告诉搜索引擎网页的关键字
-  **description**——告诉搜索引擎网站的主要内容
-  **robots**——告诉爬虫哪些页面需要索引，哪些页面不需要索引
-  **author**——标注网页的作者信息
-  **generator**——标注网页用什么IDE做的
-  **copyright**——标注版权信息
-  **renderer**——用于指定双核浏览器默认以什么方式进行页面渲染content="webkit"为webkit内核，content="ie-comp"为IE兼容模式，content="ie-stand"为IE标准模式。	
+**keywords**——告诉搜索引擎网页的关键字
+**description**——告诉搜索引擎网站的主要内容
+**robots**——告诉爬虫哪些页面需要索引，哪些页面不需要索引
+**author**——标注网页的作者信息
+**generator**——标注网页用什么IDE做的
+**copyright**——标注版权信息
+**renderer**——用于指定双核浏览器默认以什么方式进行页面渲染content="webkit"为webkit内核，content="ie-comp"为IE兼容模式，content="ie-stand"为IE标准模式。	
 
 - **常用http-equiv属性值：**
-  **content-type**——设定网页字符集
-  **X-UA-Compatible**——告知浏览器以什么版本来渲染页面
-  **cache-control**——设置浏览器如何缓存某个响应以及缓存多长时间
-  **Set-Cookie**——设置cookie设定
+**content-type**——设定网页字符集
+**X-UA-Compatible**——告知浏览器以什么版本来渲染页面
+**cache-control**——设置浏览器如何缓存某个响应以及缓存多长时间
+**Set-Cookie**——设置cookie设定
 
 
 
@@ -113,7 +115,7 @@ https://blog.csdn.net/cyjbdqn/article/details/102643927
 
 
 
-#### 2、HTML标签有哪几类？
+#### <span id="head7"> 2、HTML标签有哪几类？</span>
 
 HTML标签分为块级标签、行内标签、内联块状标签。
 
@@ -148,7 +150,7 @@ HTML标签分为块级标签、行内标签、内联块状标签。
 
   * 常见的有：<img>、<input>
 
-    
+
 
 *参考：*
 
@@ -156,18 +158,21 @@ https://www.html.cn/qa/html5/13389.html
 
 
 
-#### 3、head标签内包含什么？
+#### <span id="head8"> 3、head标签内包含什么？</span>
 
 * **title**：唯一必需元素
 
 * **base**：为页面上的所有链接规定默认地址或默认目标。通常情况下，浏览器会从当前文档的URL中提取相应的元素来填写相对URL中的空白。
-  使用<base>标签可以改变这一点。浏览器随后将不再使用当前文档的URL，而使用指定的基本URL来解析所有的相对URL。这其中包括 <a>、<img>、<link>、<form>标签中的 URL。
+使用<base>标签可以改变这一点。浏览器随后将不再使用当前文档的URL，而使用指定的基本URL来解析所有的相对URL。这其中包括 <a>、<img>、<link>、<form>标签中的 URL。
 
-  可选属性：target。值：\_blank、\_parent、\_self、\_top、framename。表明在何处打开页面中所有的链接。
+可选属性：target。值：\_blank、\_parent、\_self、\_top、framename。表明在何处打开页面中所有的链接。
 
 * **link**：链接一个外部样式表。主要属性：href、rel（指示被链接的文档是样式表，stylesheet）、type（MIME类型，“text/css”）、charset（被链接文档的字符集）
+
 * **script**
+
 * **style**
+
 * **meta**：提供有关页面的元信息。
 
 *参考*：
@@ -176,7 +181,7 @@ https://www.cnblogs.com/--cainiao/p/10266567.html
 
 
 
-#### 4、HTML5新增的语义化标签
+#### <span id="head9"> 4、HTML5新增的语义化标签</span>
 
 article、aside、audio、bdi、canvas、command、datalist、details、embed、figcaption、figure、footer、header、hgroup、keygen、mark、meter、nav、output、progress、rp、rt、ruby、section、source、summary、time、track、video
 
@@ -232,21 +237,21 @@ article、aside、audio、bdi、canvas、command、datalist、details、embed、
 
 * \<datalist>：提示可能的值，datalist及其选项不会被显示出来，它仅仅是合法输入值的列表使用input元素的list属性来邦定datalist，下面选项使用option定义。标签被用来在为 <input> 元素提供"自动完成"的特性。用户能看到一个下拉列表，里边的选项是预先定义好的，将作为用户的输入数据。
 
-  ```html
-  <input type="text" list="cars">
-    <datalist id="cars">
-        <option value="宝马"></option>
-        <option value="奔驰"></option>
-        <option value="奥迪"></option>
-    </datalist>
-  ```
+```html
+<input type="text" list="cars">
+<datalist id="cars">
+	<option value="宝马"></option>
+	<option value="奔驰"></option>
+	<option value="奥迪"></option>
+</datalist>
+```
 
 * \<embed>：定义插入的内容，如插件、flash
 
-  ```html
-  <embed src="swf/flash5924.swf" tyep="application/x-shockwave-flash">
-  </embed>
-  ```
+```html
+<embed src="swf/flash5924.swf" tyep="application/x-shockwave-flash">
+</embed>
+```
 
 * \<canvas>：容器。可以通过控制坐标在canvas上绘制图形。
 
@@ -258,9 +263,9 @@ https://www.cnblogs.com/xxqd/p/12179738.html
 
 
 
-### CSS
+### <span id="head10"> CSS</span>
 
-#### 1、CSS盒模型
+#### <span id="head11"> 1、CSS盒模型</span>
 
 CSS基础和模型将所有元素表示为一个个矩形的盒子。CSS决定这些盒子的大小、位置以及属性。
 
@@ -278,7 +283,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Introduction_to_t
 
 
 
-#### 2、长度单位（em、rem等）
+#### <span id="head12"> 2、长度单位（em、rem等）</span>
 
 * **em**： 1em等于元素的font-size。理论上1em等于所用字体中小写字母m的宽度。
 * **ex**： 所用字体中小写字母m的宽度。
@@ -290,7 +295,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Introduction_to_t
 
 
 
-#### 3、CSS3怎么做动画？
+#### <span id="head13"> 3、CSS3怎么做动画？</span>
 
 使用animation属性和@keyframes。anamation用于给动画设置CSS样式。通过@keyframes定义，再在animation中调用。
 
@@ -305,139 +310,140 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Introduction_to_t
 
 
 
-#### 4、不定宽高的元素居中
+#### <span id="head14"> 4、不定宽高的元素居中</span>
 
 * 水平居中
 
   * inline-block+text-align
 
-  ```CSS
-  .parent{
-  	width: 400px;
-      height: 100px;
-      background: #bbb;
-      text-align: center;
-  }
-  .child{
-      display: inline-block;
-      width: 100px;
-      height: 100px;
-      background: #333;
-  }
-  ```
+```CSS
+.parent{
+	width: 400px;
+	height: 100px;
+	background: #bbb;
+	text-align: center;
+}
+.child{
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background: #333;
+}
+```
 
   * table+margin
 
-  ```css
-  .parent{
-      width: 400px;
-      height: 100px;
-      background: #bbb;
-  }
-  .child{
-      display: table;
-      margin: 0 auto;
-      width: 100px;
-      height: 100px;
-      background: #333;
-  }
-  ```
+```css
+.parent{
+	width: 400px;
+	height: 100px;
+	background: #bbb;
+}
+.child{
+	display: table;
+	margin: 0 auto;
+	width: 100px;
+	height: 100px;
+	background: #333;
+}
+```
 
   * absolute+transform
 
-  ```css
-  .parent{
-      position: relative;
-      width: 400px;
-      height: 100px;
-      background: #bbb;
-  }
-  .child{
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 100px;
-      background: #333;
-  }
-  ```
+```css
+.parent{
+	position: relative;
+	width: 400px;
+	height: 100px;
+	background: #bbb;
+}
+.child{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100px;
+	height: 100px;
+	background: #333;
+}
+```
 
   * flex+justify-content
 
-  ```css
-  .parent{
-      display: flex;
-      justify-content: center;
-      width: 400px;
-      height: 100px;
-      background: #bbb;
-  }
-  .child{
-      width: 100px;
-      height: 100px;
-      background: #333;
-  }
-  ```
+```css
+.parent{
+	display: flex;
+	justify-content: center;
+	width: 400px;
+	height: 100px;
+	background: #bbb;
+}
+.child{
+	width: 100px;
+	height: 100px;
+	background: #333;
+}
+```
 
-  *p.s. 单纯垂直居中有table-cell+vertical-align、absolute+transform和flex+align-items方法。*
+*p.s. 单纯垂直居中有table-cell+vertical-align、absolute+transform和flex+align-items方法。*
 
 * 垂直+水平居中
 
   * 方法一：父元素为table，子元素为cell-table，就可以使用`vertical-align:center`实现垂直居中。优点在于父元素可以动态地改变高度。
 
-  ```css
-  .parent1{
-      display: table;
-      height:300px;
-      width: 300px;
-      background-color: #FD0C70;
-  }
-  .parent1 .child{
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
-      color: #fff;
-      font-size: 16px;
-  }
-  ```
+```css
+.parent1{
+	display: table;
+	height:300px;
+	width: 300px;
+	background-color: #FD0C70;
+}
+.parent1 .child{
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	color: #fff;
+	font-size: 16px;
+}
+```
+
   * 方法二：子元素绝对定位，距顶部50%，左边50%，然后使用CSS3 `transform: translate(-50%, -50%)`
 
-  ```CSS
-  .parent3{
-      position: relative;
-      height:300px;
-      width: 300px;
-      background: #FD0C70;
-  }
-  .parent3 .child{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      color: #fff;
-      transform: translate(-50%, -50%);
-  }
-  ```
+```CSS
+.parent3{
+	position: relative;
+	height:300px;
+	width: 300px;
+	background: #FD0C70;
+}
+.parent3 .child{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: #fff;
+	transform: translate(-50%, -50%);
+}
+```
+
   * 方法三：使用CSS3 flex布局
 
-  ```css
-  .parent4{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 300px;
-      height:300px;
-      background: #FD0C70;
-  }
-  .parent4 .child{
-      color:#fff;
-  }
-  ```
+```css
+.parent4{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 300px;
+	height:300px;
+	background: #FD0C70;
+}
+.parent4 .child{
+	color:#fff;
+}
+```
 
-  
+
 
 *参考*：
 
 https://www.cnblogs.com/jogen/p/5213566.html
 
 https://blog.csdn.net/qq_41960337/article/details/88668753
-
