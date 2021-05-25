@@ -34,204 +34,200 @@
 * **参数处理**
 
   * 默认参数值
-
-允许在没有值或undefined被传入时使用默认形参。
-
-调用时解析。每次函数调用时都会创建一个新的参数对象。
-
-```javascript
-function append(value, array = []) {
-array.push(value);
-return array;
-}
-
-append(1); //[1]
-append(2); //[2], not [1, 2]
-```
-
-  * 剩余参数
-
-允许将一个不定数量的参数表示为一个数组。
-
-**剩余参数和arguments对象之间的区别：**
-
-    * 剩余参数只包含哪些没有对应形参的实参，而arguments对象包含了传给函数的所有实参。
+  
+    允许在没有值或undefined被传入时使用默认形参。
+  
+    调用时解析。每次函数调用时都会创建一个新的参数对象。
+  
+    ```javascript
+    function append(value, array = []) {
+    array.push(value);
+    return array;
+    }
     
+    append(1); //[1]
+    append(2); //[2], not [1, 2]
+    ```
+  
+  * 剩余参数
+  
+    允许将一个不定数量的参数表示为一个数组。arguments对象还有一些附加的属性（如callee属性）。
+  
+    **剩余参数和arguments对象之间的区别：**
+  
+    * 剩余参数只包含哪些没有对应形参的实参，而arguments对象包含了传给函数的所有实参。
     * arguments对象不是一个真正的数组，而剩余参数是真正的Array实例。
-
-应该是因为剩余参数是真正的Array实例，故其可以用于箭头函数；而argument作为类数组对象不行。*（是和箭头函数不绑定this有关？还得再研究一下）*
-
-实验结果：
-
-```JavaScript
-var sum1 = () => {
-	let res = 0;
-	for(let i = 0; i < arguments.length; i ++) {
-res += arguments[i];
-}
-return res;
-}
-var sum2 = (...arg) => {
-let res = 0;
-for(let i = 0; i < arg.length; i ++) {
-res += arg[i];
-}
-return res;
-}
-console.log(sum1(1, 2, 3, 4)) // Uncaught ReferenceError: arguments is not defined
-console.log(sum2(1, 2, 3, 4)) // 10
-```
-
-    * arguments对象还有一些附加的属性（如callee属性）
-
-  * 展开运算符（...）
-
-可以在函数调用/数组构造时将数组表达式或者string在语法层面展开；还可以在构造字面量对象时，将对象表达式按key-value的方式展开。（字面量一般指[1, 2, 3]或者{name: "lee"}这种简洁的构造方式，多层嵌套的数组和对象扩展运算符无法扩展。
-
-一些用法：
-
-    * 等价于apply的使用
-
-如果想将数组元素迭代为函数参数，一般使用Function.prototype.apply的方式进行调用：
-
-```javascript
-function myFunction(x, y, z) { }
-var args = [0, 1, 2];
-myFunction.apply(null, args);
-```
-
-有了展开语法后可以写为：
-
-```javascript
-function myFunction(x, y, z) { }
-var args = [0, 1, 2];
-myFunction(...args);
-```
-
-    * 数组和对象的复制
-
-```javascript
-//数组的复制
-var arr1 = ['hello']
-var arr2 =[...arr1]
-arr2 // ['hello']
-//对象的复制
-var obj1 = {name:'chuichui'}
-var obj2 ={...arr}
-obj2 //  {name:'chuichui'}
-```
-
-    * 数组和对象的合并
-
-```javascript
-//数组的合并
-var arr1 = ['hello']
-var arr2 =['chuichui']
-var mergeArr = [...arr1,...arr2]
-mergeArr  // ['hello','chuichui']
-// 对象分合并
-var obj1 = {name:'chuichui'}
-var obj2 = {height:176}
-var mergeObj = {...obj1,...obj2}
-mergeObj // {name: "chuichui", height: 176}
-```
-
-    * 解构字符串
-
-```javascript
-var arr1 = [...'hello']
-arr1 // ["h", "e", "l", "l", "o"]
-```
+  
+  ​	应该是因为剩余参数是真正的Array实例，故其可以用于箭头函数；而argument作为类数组对象不行。*（是和箭头函数不绑定this有关？还得再研究一下）*
+  
+  ​	实验结果：
+  
+  ```javascript
+  var sum1 = () => {
+  	let res = 0;
+  	for(let i = 0; i < arguments.length; i ++) {
+  res += arguments[i];
+  }
+  return res;
+  }
+  var sum2 = (...arg) => {
+  let res = 0;
+  for(let i = 0; i < arg.length; i ++) {
+  res += arg[i];
+  }
+  return res;
+  }
+  console.log(sum1(1, 2, 3, 4)) // Uncaught ReferenceError: arguments is not defined
+  console.log(sum2(1, 2, 3, 4)) // 10
+  ```
+    * 展开运算符（...）
+  
+      可以在函数调用/数组构造时将数组表达式或者string在语法层面展开；还可以在构造字面量对象时，将对象表达式按key-value的方式展开。（字面量一般指[1, 2, 3]或者{name: "lee"}这种简洁的构造方式，多层嵌套的数组和对象扩展运算符无法扩展。
+  
+      一些用法：
+  
+      * 等价于apply的使用
+  
+        如果想将数组元素迭代为函数参数，一般使用Function.prototype.apply的方式进行调用：
+  
+        ```javascript
+        function myFunction(x, y, z) { }
+        var args = [0, 1, 2];
+        myFunction.apply(null, args);
+        ```
+  
+        有了展开语法后可以写为：
+  
+        ```javascript
+        function myFunction(x, y, z) { }
+        var args = [0, 1, 2];
+        myFunction(...args);
+        ```
+  
+      * 数组和对象的复制
+  
+        ```javascript
+        //数组的复制
+        var arr1 = ['hello']
+        var arr2 =[...arr1]
+        arr2 // ['hello']
+        //对象的复制
+        var obj1 = {name:'chuichui'}
+        var obj2 ={...arr}
+        obj2 //  {name:'chuichui'}
+        ```
+  
+      * 数组和对象的合并
+  
+        ```javascript
+        //数组的合并
+        var arr1 = ['hello']
+        var arr2 =['chuichui']
+        var mergeArr = [...arr1,...arr2]
+        mergeArr  // ['hello','chuichui']
+        // 对象分合并
+        var obj1 = {name:'chuichui'}
+        var obj2 = {height:176}
+        var mergeObj = {...obj1,...obj2}
+        mergeObj // {name: "chuichui", height: 176}
+        ```
+  
+      * 解构字符串
+  
+        ```javascript
+        var arr1 = [...'hello']
+        arr1 // ["h", "e", "l", "l", "o"]
+        ```
 
 * **模板字面量**
 
-允许嵌入表达式的字符串字面量。使用反引号来替代普通字符串中的双引号和单引号。模板字符串可以包含特定语法（`${expression}`）的占位符。占位符中的表达式和周围的文本会一起传递给一个默认函数，该函数负责将所有部分连接起来。
+  允许嵌入表达式的字符串字面量。使用反引号来替代普通字符串中的双引号和单引号。模板字符串可以包含特定语法（`${expression}`）的占位符。占位符中的表达式和周围的文本会一起传递给一个默认函数，该函数负责将所有部分连接起来。
 
-  * 多行字符串
+    * 多行字符串
 
-    * 一般使用
+      * 一般使用
 
-```javascript
-console.log('string text line 1\n' + 
-'string text line 2');
-// "string text line 1
-// string text line 2"
-```
+      ```javascript
+      console.log('string text line 1\n' + 
+      'string text line 2');
+      // "string text line 1
+      // string text line 2"
+      ```
 
-    * 模板字面量使用
+      * 模板字面量使用
 
-```javascript
-console.log(`string text line 1
-string text line 2`);
-// "string text line 1
-// string text line 2"
-```
+        ```javascript
+        console.log(`string text line 1
+        string text line 2`);
+        // "string text line 1
+        // string text line 2"
+        ```
 
-  * 字符串插值
+    * 字符串插值
 
-```javascript
-// 普通字符串嵌入表达式
-var a = 5;
-var b = 10;
-console.log('Fifteen is ' + (a + b) + ' and\nnot ' + (2 * a + b) + '.');
+      ```javascript
+      // 普通字符串嵌入表达式
+      var a = 5;
+      var b = 10;
+      console.log('Fifteen is ' + (a + b) + ' and\nnot ' + (2 * a + b) + '.');
+      
+      // 模板字符串
+      var a = 5;
+      var b = 10;
+      console.log(`Fifteen is ${a + b} and
+      not ${2 * a + b}.`);
+      ```
 
-// 模板字符串
-var a = 5;
-var b = 10;
-console.log(`Fifteen is ${a + b} and
-not ${2 * a + b}.`);
-```
+    * 带标签的模板字面量
 
-  * 带标签的模板字面量
+      标签实现了用函数解析模板字符串。标签函数的第一个参数包含一个字符串值的数组。其余的参数和表达式相关。最后，函数可以返回处理好的字符串（或也可以返回完全不同的东西）。用于该标签的函数可以被任意命名。
 
-标签实现了用函数解析模板字符串。标签函数的第一个参数包含一个字符串值的数组。其余的参数和表达式相关。最后，函数可以返回处理好的字符串（或也可以返回完全不同的东西）。用于该标签的函数可以被任意命名。
+      ```javascript
+      var person = 'Mike';
+      var age = 28;
+      
+      function myTag(strings, personExp, ageExp) {
+      
+      var str0 = strings[0]; // "that "
+      var str1 = strings[1]; // " is a "
+      
+      // There is technically a string after
+      // the final expression (in our example),
+      // but it is empty (""), so disregard.
+      // var str2 = strings[2];
+      
+      var ageStr;
+      if (ageExp > 99){
+      ageStr = 'centenarian';
+      } else {
+      ageStr = 'youngster';
+      }
+      
+      return str0 + personExp + str1 + ageStr;
+      
+      }
+      
+      var output = myTag`that ${ person } is a ${ age }`;
+      
+      console.log(output);
+      // that Mike is a youngster
+      ```
 
-```javascript
-var person = 'Mike';
-var age = 28;
+    * 原始字符串
 
-function myTag(strings, personExp, ageExp) {
+      在标签函数的第一个参数中，存在一个特殊的属性raw，可以通过它来访问模板字符串的原始字符串，而不经过特殊字符的替换。
 
-var str0 = strings[0]; // "that "
-var str1 = strings[1]; // " is a "
+      ```javascript
+      function tag(strings) {
+      console.log(strings.raw[0]);
+      }
+      
+      tag`string text line 1 \n string text line 2`;
+      // logs "string text line 1 \n string text line 2" ,
+      // including the two characters '\' and 'n'
+      ```
 
-// There is technically a string after
-// the final expression (in our example),
-// but it is empty (""), so disregard.
-// var str2 = strings[2];
-
-var ageStr;
-if (ageExp > 99){
-ageStr = 'centenarian';
-} else {
-ageStr = 'youngster';
-}
-
-return str0 + personExp + str1 + ageStr;
-
-}
-
-var output = myTag`that ${ person } is a ${ age }`;
-
-console.log(output);
-// that Mike is a youngster
-```
-
-  * 原始字符串
-
-在标签函数的第一个参数中，存在一个特殊的属性raw，可以通过它来访问模板字符串的原始字符串，而不经过特殊字符的替换。
-
-```javascript
-function tag(strings) {
-console.log(strings.raw[0]);
-}
-
-tag`string text line 1 \n string text line 2`;
-// logs "string text line 1 \n string text line 2" ,
-// including the two characters '\' and 'n'
-```
-
-
+      
 
 *参考*：
 
