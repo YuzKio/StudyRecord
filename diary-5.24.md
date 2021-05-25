@@ -275,7 +275,7 @@ CSS基础和模型将所有元素表示为一个个矩形的盒子。CSS决定�
   * 尺寸为内容宽度和内容高度
   * `box-sizing:content-box` 时，内容区域的大小可明确通过`width`, `min-width`, `max-width`, `height`, `min-height`和`max-height`控制
 
-![img](C:\Users\40724\AppData\Local\YNote\data\407249117@qq.com\dd2b0208793d4d95a3965ebbcd74601a\clipboard.png)
+![img](https://i.loli.net/2021/05/25/iWsGIbJr76L9gac.png)
 
 *参考*：
 
