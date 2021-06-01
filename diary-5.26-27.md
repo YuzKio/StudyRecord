@@ -296,27 +296,26 @@ https://www.jianshu.com/p/c9049adff5ec
   强是强制的意思。当浏览器去请求某个文件的时候，服务端就在respone header里面对该文件做了缓存配置。缓存的时间、缓存类型都由服务端控制，具体表现为respone header的cache-control，常见的设置是max-age public private no-cache no-store等。
 
   * max-age表示缓存的时间
-* public表示可用被浏览器和代理服务器缓存
+  * public表示可用被浏览器和代理服务器缓存
   * immutable表示该资源永远不变，这么设置的意思是为了让用户在刷新页面的时候不要去请求服务器。就是说，public+immutable的话，用户就算刷新页面，浏览器也不会向服务器发起请求，而是直接从本地磁盘或者内存中读取缓存并返回200状态。
-* 总结：
-  
-  * cache-control: max-age=xxxx，public
-       客户端和代理服务器都可以缓存该资源；
-     客户端在xxx秒的有效期内，如果有请求该资源的需求的话就直接读取缓存，statu code:200 ，如果用户做了刷新操作，就向服务器发起http请求
+  * 总结：
+    * cache-control: max-age=xxxx，public
+      客户端和代理服务器都可以缓存该资源；
+      客户端在xxx秒的有效期内，如果有请求该资源的需求的话就直接读取缓存，statu code:200 ，如果用户做了刷新操作，就向服务器发起http请求
     * cache-control: max-age=xxxx，private
        只让客户端可以缓存该资源；代理服务器不缓存
        客户端在xxx秒内直接读取缓存,statu code:200
-  * cache-control: max-age=xxxx，immutable
-       客户端在xxx秒的有效期内，如果有请求该资源的需求的话就直接读取缓存，statu code:200 ，即使用户做了刷新操作，也不向服务器发起http请求
+    * cache-control: max-age=xxxx，immutable
+      客户端在xxx秒的有效期内，如果有请求该资源的需求的话就直接读取缓存，statu code:200 ，即使用户做了刷新操作，也不向服务器发起http请求
     * cache-control: no-cache
        跳过设置强缓存，但是不妨碍设置协商缓存；一般如果你做了强缓存，只有在强缓存失效了才走协商缓存的，设置了no-cache就不会走强缓存了，每次请求都回询问服务端。
-  * cache-control: no-store
-       不缓存，这个会让客户端、服务器都不缓存，也就没有所谓的强缓存、协商缓存了。
+    * cache-control: no-store
+         不缓存，这个会让客户端、服务器都不缓存，也就没有所谓的强缓存、协商缓存了。
   * 强缓存步骤：
-   * 第一次请求a.js，缓存表中没有该信息，直接请求后端服务器；
-     * 后端服务器返回了a.js，且http response header中cache-control为max-age=xxx，所以是强缓存规则，存入缓存表中；
-     * 第二次请求a.js，缓存表中时max-age，那么命中强缓存，然后判断是否过期。如果没过期直接读缓存的a.js；如果过期了，则执行协商缓存的步骤。
-
+     * 第一次请求a.js，缓存表中没有该信息，直接请求后端服务器；
+    * 后端服务器返回了a.js，且http response header中cache-control为max-age=xxx，所以是强缓存规则，存入缓存表中；
+    * 第二次请求a.js，缓存表中时max-age，那么命中强缓存，然后判断是否过期。如果没过期直接读缓存的a.js；如果过期了，则执行协商缓存的步骤。
+  
 * **协商缓存**
 
   强缓存就是给资源设置一个过期时间，客户端每次请求资源时都会看是否过期；只有过期才会去询问服务器。response header中设置：etag，last-modified。协商缓存的触发条件：Cache-Control的值为no-cache（不强缓存）或者max-age过期了（强缓存，但总有过期的时候）。
@@ -338,7 +337,7 @@ https://www.jianshu.com/p/c9049adff5ec
 
 * **用户行为对缓存的影响**
 
-  ![img](https://images2015.cnblogs.com/blog/408483/201605/408483-20160525202949975-1541314356.png)
+  ![img](https://i.loli.net/2021/05/31/FOe57ZauByqUIMN.png)
 
   F5会跳过强缓存规则，直接走协商缓存。Ctrl+F5跳过所有缓存规则，和第一次请求一样，重新获取资源。
 
@@ -572,10 +571,6 @@ function advanceQuickSortTemplate(array) {
 
 # <span id="head14">前端学院</span>
 
-
-
-
-
 Codepen：https://codepen.io/yuzkio/pen/QWpvoww
 
 * CSS font的简写规则
@@ -614,69 +609,67 @@ Codepen：https://codepen.io/yuzkio/pen/QWpvoww
 
 * **类选择符**：可以赋予任意个元素
 
-- - （.）：包含所指示类的所有元素（相当于省略了通配符）
-  - （其他选择符).(类)：匹配包含(类)的(其他选择符)元素。比如p.warning只匹配包含了warning类的p元素。
-  - 两个类选择符串在一起，选择的是同时具有两个类名的元素，而且对类名的顺序没有要求。例如HTML源码中写class="urgent warning"，而CSS选择符写的是.warning.urgent。并且串写选择符只会影响同时具有这两个类名的元素，单独有某一类名的选择器不会被串写选择符的属性影响。
+  * （.）：包含所指示类的所有元素（相当于省略了通配符）
+  * （其他选择符).(类)：匹配包含(类)的(其他选择符)元素。比如p.warning只匹配包含了warning类的p元素。
+  * 两个类选择符串在一起，选择的是同时具有两个类名的元素，而且对类名的顺序没有要求。例如HTML源码中写class="urgent warning"，而CSS选择符写的是.warning.urgent。并且串写选择符只会影响同时具有这两个类名的元素，单独有某一类名的选择器不会被串写选择符的属性影响。
 
 * **ID选择符**：
 
-- - 散列字元（#）
-  - HTML文档中一个ID能且仅能使用一次
-  - 不能串在一起使用，其值不是能以空格分隔的列表
+  * 散列字元（#）
+  * HTML文档中一个ID能且仅能使用一次
+  * 不能串在一起使用，其值不是能以空格分隔的列表
 
 * **属性选择符**：
 
-- - 简单属性选择符：选择具有某个属性的元素，不管属性的值。
-
-  - - h1[class] { color: silver;}		选择具有class属性的h1元素，将字体颜色设置为silver
+  * 简单属性选择符：选择具有某个属性的元素，不管属性的值。
+  * - h1[class] { color: silver;}		选择具有class属性的h1元素，将字体颜色设置为silver
     - a[href][title]				基于多个元素的选择，这两个选择是&&而不是||
 
-  - 精准属性值选择符：只选择属性为特定值的元素。
+  * 精准属性值选择符：只选择属性为特定值的元素。
 
-  - - 要求属性的值与指定的值完全一致。 
+  * - 要求属性的值与指定的值完全一致。 
     - ID选择符与引用id属性的属性选择符不完全等效。
 
-  - 部分匹配属性值选择符
+  * 部分匹配属性值选择符
 
-  - - [foo|="bar"]：以bar和一个英文破折号或bar本身开头
+  * - [foo|="bar"]：以bar和一个英文破折号或bar本身开头
     - [foo~="bar"]：选择的元素有foo属性，且有包含bar这个词的一组词。p.warning和p[class~="warning"]等效
     - [foo^="bar"]：选择的元素有foo属性，以bar开头
     - [foo$="bar"]：选择的元素有foo属性，以bar结尾
 
-  - 起始值属性选择符
+  * 起始值属性选择符
 
 * **文档结构选择符**
 
-- - 后代选择符：空格
-  - 子代选择符：>
-  - 紧邻同胞连接符：+
-  - 一般同胞连接符：~
+  * 后代选择符：空格
+  * 子代选择符：>
+  * 紧邻同胞连接符：+
+  * 一般同胞连接符：~
 
 * **伪类选择符**
 
-- - 伪类始终指代所依附的元素
+  * 伪类始终指代所依附的元素
+  * 选择根元素：:root
 
-  - 选择根元素：:root
+  * 选择空元素：:empty	没有任何子代的元素，甚至连文本节点都没有（包括文本和空白），唯一一个在匹配时考虑文本节点的CSS选择符
 
-  - 选择空元素：:empty	没有任何子代的元素，甚至连文本节点都没有（包括文本和空白），唯一一个在匹配时考虑文本节点的CSS选择符
+  * 选择唯一子代：:only-child
 
-  - 选择唯一子代：:only-child
+  * 选择唯一元素类型：:only-of-type
 
-  - 选择唯一元素类型：:only-of-type
+  * 选择第一个子代：:first-child
 
-  - 选择第一个子代：:first-child
+  * 选择最后一个子代：:last-child
 
-  - 选择最后一个子代：:last-child
+  * 选择第一个某种元素：:first-of-type
 
-  - 选择第一个某种元素：:first-of-type
+  * 选择最后一个某种元素：:last-of-type
 
-  - 选择最后一个某种元素：:last-of-type
+  * 选择每第n个子元素：:nth-child(n)/nth-last-child(n)
 
-  - 选择每第n个子元素：:nth-child(n)/nth-last-child(n)
+  * 动态伪类：
 
-  - 动态伪类：
-
-  - - 链接伪类：:link :visited
+  * - 链接伪类：:link :visited
 
     - 用户操作伪类：
 
@@ -684,9 +677,9 @@ Codepen：https://codepen.io/yuzkio/pen/QWpvoww
       - :hover：鼠标指针放置其上的元素
       - :active：由用户输入激活的元素
 
-  - UI状态伪类：
+  * UI状态伪类：
 
-  - - :enabled：启用的用户界面元素
+  * - :enabled：启用的用户界面元素
     - :disabled
     - :checked
     - :indeterminate：只能由DOM设定，不能由用户设定
@@ -700,15 +693,15 @@ Codepen：https://codepen.io/yuzkio/pen/QWpvoww
     - :read-write
     - :read-only
 
-  - :target伪类
+  * :target伪类
 
-  - - 如果对应的页面中有ID为target-pseudo（片段标识符）的元素，那个元素就是片段标识符的目标
+  * - 如果对应的页面中有ID为target-pseudo（片段标识符）的元素，那个元素就是片段标识符的目标
 
-  - :lang伪类
+  * :lang伪类
 
-  - 否定伪类:not()：
+  * 否定伪类:not()：
 
-  - - 括号中是简单的选择符（一个类型选择符、通用选择符、属性选择符、类选择符、ID选择符或伪类）（没有祖辈-后代关系的选择符）
+  * - 括号中是简单的选择符（一个类型选择符、通用选择符、属性选择符、类选择符、ID选择符或伪类）（没有祖辈-后代关系的选择符）
 
 * **伪元素选择符**
   伪类使用一个冒号，伪元素使用两个；所有伪元素只能出现在选择符的最后。

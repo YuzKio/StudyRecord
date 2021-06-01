@@ -1,3 +1,15 @@
+- [**面经**](#head1)
+	- [**网络/浏览器**](#head2)
+		- [**1、浏览器是什么？**](#head3)
+		- [ **2、HTTP和HTTPS的区别？**](#head4)
+		- [ **3、公钥和私钥**](#head5)
+		- [**4、Cookie、Session、webStorage**](#head6)
+		- [**5、TCP和UDP**](#head7)
+		- [**6、Web前端性能优化常见方法**](#head8)
+		- [**7、跨域**](#head9)
+	- [**JavaScript**](#head10)
+		- [**1、垃圾回收机制**](#head11)
+
 # <span id="head1">面经</span>
 
 ## <span id="head2">网络/浏览器</span>
@@ -406,9 +418,231 @@ https://blog.csdn.net/jiangnanqbey/article/details/81709322
 
 ### <span id="head8"> **6、Web前端性能优化常见方法**</span>
 
+* **内容优化**
+
+  * ***减少HTTP请求数***
+
+    * 合并多个CSS文件和JS文件
+
+    * 利用CSS Sprites整合图像
+
+      把很多小图片合并到一张较大的图片里。展示时，通过background-position来改变背景图片的位置，显示想要显示出来的部分。
+
+    * Inline Images（data: URL scheme）
+
+    * 合理设置HTTP缓存
+
+  * ***减少DNS查询***
+
+  * ***避免重定向***
+
+  * ***使用Ajax缓存***
+
+  * ***延迟加载组件，预加载组件***
+
+  * ***减少DOM元素数量：***页面中存在大量DOM元素，会导致javascript遍历DOM效率变慢
+
+  * ***最小化iframe的数量：***iframes提供了一个简单的方式把一个网站嵌入到另一个网站中，但其创建速度比其他包括JavaScript和CSS的DOM元素的创建慢了1-2个数量级。
+
+  * ***避免404：***HTTP请求时间消耗是很大的，避免请求一个不存在的页面。
+
+* **服务器优化**
+
+  * ***使用内容分发网络（CDN）：***把网站内容分散到多个、处于不同地域位置的服务器上可以加快下载速度。
+  * ***GZIP压缩***
+  * ***设置ETag***
+  * ***提前刷新缓冲区***
+  * ***对Ajax请求使用GET方法***
+  * ***避免空的图像src***
+
+* **Cookie优化**
+
+  * ***减小Cookie大小***
+  * ***针对Web组件使用域名无关的Cookie***
+
+* **CSS优化**
+
+  * ***将CSS代码放在HTML页面的顶部***
+
+  * ***避免使用CSS表达式***
+
+  * ***使用\<link>来代替@import***
+
+    两者都是外部引用CSS的方式。
+
+    link：`<link href="外部CSS文件的URL路径" rel="stylesheet" type="text/css" />`
+
+    @import：
+
+    ```html
+    <style type="text/css">
+    @import url("外部CSS文件URL路径地址");
+    </style>
+    ```
+
+    区别：
+
+    * link是XHTML标签，除了加载CSS外，还可以定义RSS其他事务；@import属于CSS范畴，只能加载CSS；
+    * link引用CSS时，在页面载入时同时加载；@import需要页面完全载入后才加载；
+    * link是XHTML标签，无兼容问题；@import是在CSS2.1中提出的，低版本的浏览器不支持；
+    * link支持使用JavaScript控制DOM去改变样式；@import不支持这样的操作
+
+  * ***避免使用Filters***
+
+* **JavaScript优化**
+
+  * ***将JavaScript脚本放在页面的底部***
+  * ***将JavaScript和CSS作为外部文件来引用：***实际应用中这样可以提高页面速度，因为JavaScript和CSS文件都能在浏览器中产生缓存；
+  * ***缩小JS和CSS***
+  * ***删除重复的脚本***
+  * ***最小化DOM的访问***
+  * ***开发智能的事件处理程序***
+  * ***谨慎使用with，避免使用eval Function函数，减少作用域链查找***
+
+* **图像优化**
+
+  * ***优化图片大小***
+  * ***通过CSS Sprites优化图片***
+  * ***不要在HTML中使用缩放图片***
+  * ***favicon.ico要小而且可缓存***
+
+
+
+*参考：*
+
+https://www.cnblogs.com/yanggb/p/10381366.html
+
+https://www.cnblogs.com/bobo-site/p/9317930.html
+
 
 
 ### <span id="head9"> **7、跨域**</span>
+
+* **什么是跨域**
+
+  当请求一个URL的协议、域名、端口三者之间任意一个与当前页面URL不同即为跨域。
+
+* **非同源限制**
+
+  * 无法读取非同源网页的Cookie、LocalStorage和IndexedDB
+  * 无法接触非同源网页的DOM
+  * 无法向非同源地址发送AJAX请求
+
+* **跨域解决方法**
+
+  * ***设置`document.domain`解决无法读取非同源网页的Cookie问题***
+
+    因为浏览器是通过`document.domain`属性来检查两个页面是否同源，因此只要通过设置相同的`document.domain`，两个页面就可以共享Cookie（此方案仅限主域相同，子域不同的跨域应用场景）
+
+    ```javascript
+    document.domain = 'test.com';
+    ```
+
+  * ***跨文档通信API：`window.posMessage()`***
+
+    调用postMessage方法实现父窗口http://test1.com向子窗口http://test2.com发送消息。可用于解决以下方面的问题：
+
+    * 页面和其打开的新窗口的数据传递
+    * 多窗口之间消息传递
+    * 页面与嵌套iframe消息传递
+    * 上面三个场景的跨域数据传递
+
+    ```javascript
+    // 父窗口打开一个子窗口
+    var openWindow = window.opent('http://test2.com', 'title');
+    // 父窗口向子窗口发送消息（第一个参数代表发送的内容，第二个参数代表接收消息窗口的url
+    openWindow.postMessage('Nice to meet you!', 'http://test2.com');
+    ```
+
+    调用message事件，监听对方发送的消息
+
+    ```javascript
+    // 监听message消息
+    window.addEventListener('message', function (e) {
+        console.log(e.source); // 发送消息的窗口
+        console.log(e.origin); // 消息发向的网址
+        console.log(e.data); // 发送的消息
+    }, false);
+    ```
+
+  * ***JSONP***
+
+    JSONP是服务器与客户端跨源通信的常用方法，最大特点就是简单适用，兼容性好，缺点是只支持GET请求，不支持POST请求。
+
+    *核心思想*：网页通过添加一个\<script>元素，向服务器请求JSON数据，服务器收到请求后，将数据放在一个指定名字的回调函数的参数位置传回来。
+
+    * 原生实现
+
+      ```javascript
+      <script src="http://test.com/data.php?callback=dosomething"></script>
+      // 向服务器test.com发出请求，该请求的查询字符串有一个callback参数，用来指定回调函数的名字
+       
+      // 处理服务器返回回调函数的数据
+      <script type="text/javascript">
+          function dosomething(res){
+              // 处理获得的数据
+              console.log(res.data)
+          }
+      </script>
+      ```
+
+    * jQuery ajax
+
+      ```javascript
+      $.ajax({
+      	url: 'http://www.test.com:8080/login',
+          type: 'get',
+          dataType: 'jsonp', // 请求方式为jsonp 
+          jsonpCallback: "hadleCallbacl", // 自定义回调函数名
+          data: {}
+      });
+      ```
+
+    * Vue.js
+
+      ```javascript
+      this.$http.jsonp('http://www.domain2.com:8080/login', {
+          params: {},
+          jsonp: 'handleCallback'
+      }).then((res) => {
+          console.log(res);
+      })
+      ```
+
+  * ***CORS***
+
+    CORS是跨域资源分享（Cross-Origin Resource Sharing）的缩写。属于跨源AJAX请求的根本解决方法。
+
+    **1、普通跨域请求：只需服务端设置Access-Control-Allow-Origin**
+
+    **2、带cookie跨域请求：前后端都需要进行设置**
+
+    【前端设置】根据xhr.withCredentials字段判断是否带有cookie
+
+    * 原生ajax
+
+      ```javascript
+      var xhr = new XMLHttpRequest();
+      
+      // 前端设置是否带cookie
+      xhr.withCredentials = true;
+      
+      xhr.open('post', 'http://www.domain2.com:8080/login', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send('user=admin');
+      
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+              alert(xhr.responseText);
+          }
+      }
+      ```
+
+      
+
+*参考：*
+
+https://blog.csdn.net/qq_38128179/article/details/84956552
 
 
 
@@ -416,3 +650,4 @@ https://blog.csdn.net/jiangnanqbey/article/details/81709322
 
 ### <span id="head11"> **1、垃圾回收机制**</span>
 
+*文章*：https://segmentfault.com/a/1190000018605776
